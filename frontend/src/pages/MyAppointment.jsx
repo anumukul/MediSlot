@@ -8,7 +8,6 @@ import { assets } from '../assets/assets'
 const MyAppointments = () => {
   const { backendUrl, token, getDoctorsData } = useContext(AppContext)
   const navigate = useNavigate()
-  const { doctors } = useContext(AppContext)
   const [appointments, setAppointments] = useState([])
   const [payment, setPayment] = useState('')
 
@@ -103,32 +102,6 @@ const MyAppointments = () => {
       getUserAppointments()
     }
   }, [token])
-
-  // Generate appointment data from doctors
-  useEffect(() => {
-    if (doctors.length) {
-      const generatedAppointments = doctors.slice(0, 3).map((doc, idx) => ({
-        _id: `appointment_${idx}`,
-        docData: {
-          name: doc.name,
-          speciality: doc.speciality,
-          image: doc.image,
-          address: doc.address || { line1: "Street X", line2: "City Y" }
-        },
-        slotDate: `12_0${idx + 1}_2025`,
-        slotTime: `${10 + idx}:00 AM`,
-        payment: idx === 1,         // Simulate second one as paid
-        isCompleted: idx === 2,     // Simulate third one as completed
-        cancelled: false
-      }))
-      setAppointments(generatedAppointments)
-    }
-  }, [doctors])
-
-
-
-  const simulateStripe = () => toast.info("Redirecting to Stripe...")
-  const simulateRazorpay = () => toast.info("Opening Razorpay...")
 
   return (
     <div>
