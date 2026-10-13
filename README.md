@@ -1,168 +1,194 @@
-# MediSlot - Doctor Appointment Web App
+# MediSlot — Doctor Appointment Web App
 
-**MediSlot** is a full-stack web application designed to make healthcare more accessible by simplifying the process of booking doctor appointments. It offers three levels of login: **Patient**, **Doctor**, and **Admin**, each with distinct features tailored to their roles. The app integrates **online payment gateways (Stripe and Razorpay)** to facilitate seamless and secure payments. Built using the **MERN stack** (MongoDB, Express.js, React.js, and Node.js), MediSlot provides an efficient, user-friendly experience for both patients and healthcare providers.
+**MediSlot** is a full-stack healthcare appointment platform. It makes it simple for patients to discover doctors, book appointments, and pay online, while giving doctors and administrators dedicated dashboards to manage their practice and the platform.
+
+The project is split into three independently deployable apps that share one REST API:
+
+| App | Description | Live |
+| --- | --- | --- |
+| `frontend` | Patient-facing app (browse, book, pay) | https://medi-slot-murex.vercel.app |
+| `admin` | Admin + Doctor dashboard | https://medi-slot-2wr6.vercel.app |
+| `backend` | Express REST API + MongoDB | https://medislot-lyd4.onrender.com |
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React.js
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Payment Gateways**: Razorpay
-- **Authentication**: JSON Web Token (JWT)
+- **Frontend / Admin**: React 19, Vite, React Router, Tailwind CSS, Axios, React Toastify
+- **Backend**: Node.js, Express 5
+- **Database**: MongoDB (Mongoose)
+- **Auth**: JSON Web Tokens (JWT) with `bcrypt` password hashing
+- **Media**: Cloudinary (doctor & profile images)
+- **Payments**: Razorpay
+- **Deployment**: Vercel (frontend + admin), Render (backend), MongoDB Atlas
 
 ## 🔑 Key Features
 
-### 1. Three-Level Authentication
+### Patient
+- Sign up / log in and manage a personal profile (name, email, address, gender, birthday, profile picture).
+- Search doctors by specialty and view detailed doctor profiles.
+- Book appointments by date, time, and payment method (Cash or Razorpay).
+- Pay securely through Razorpay and view upcoming/past appointments.
+- Cancel or reschedule appointments.
 
-- **Patient Login**: 
-  - Patients can sign up, log in, and book appointments with doctors.
-  - Manage appointments (view, cancel, or reschedule).
-  - Secure online payment options available (cash, Stripe, Razorpay).
-  - User profile with editable information (name, email, address, gender, birthday, profile picture).
+### Doctor
+- Dedicated dashboard with earnings, patient count, appointment count, and latest bookings.
+- View appointment details (patient info, payment mode, status).
+- Mark appointments as completed or cancel them.
+- Update profile details (description, fees, address, availability).
 
-- **Doctor Login**:
-  - Doctors can log in and manage appointments.
-  - Dashboard displays earnings, number of patients, number of appointments, and latest bookings.
-  - Update profile details (description, fees, address, availability status).
-  - View appointment details (patient info, payment mode, appointment status).
+### Admin
+- Dashboard analytics: total doctors, patients, appointments, and recent bookings.
+- Create and manage doctor profiles (image, specialty, degree, experience, address, fees, etc.).
+- View and manage every appointment (cancel or mark as completed).
 
-- **Admin Login**:
-  - Admins can create and manage doctor profiles.
-  - Dashboard with analytics: total doctors, total appointments, total patients, and recent bookings.
-  - Add new doctors (image, specialty, degree, experience, address, fees, etc.).
-  - View and manage all appointments (cancel or mark as completed).
-
-## 🏠 Home Page
-
-- Features a user-friendly layout where users can:
-  - **Search for doctors** based on specialties.
-  - **View top doctors** and their profiles.
-  - Explore additional sections: About Us, Delivery Information, Privacy Policy, and Get in Touch.
-- **Footer** includes navigation links: Home, About Us, Delivery Info, Privacy Policy, Contact Us.
-
-## 🩺 All Doctors Page
-
-- Lists all available doctors.
-- Users can **filter doctors by specialty**.
-- Clicking on a doctor's profile redirects to the **Doctor Appointment Page**.
-
-## 📄 About Page
-
-- Provides information about **MediSlot’s vision** and mission.
-- **Why Choose Us** section highlights:
-  - **Efficiency**: Streamlined appointment process.
-  - **Convenience**: Online booking and payment.
-  - **Personalization**: Tailored experience based on user preferences.
-- Footer section with additional links.
-
-## 📞 Contact Page
-
-- Contains **office address** and contact details.
-- Section to explore job opportunities.
-- Footer navigation links.
-
-## 📅 Doctor Appointment Page
-
-- Displays detailed information about the selected doctor:
-  - **Profile picture, qualification, experience**, and a brief description.
-  - **Appointment booking form**: Choose date, time, and payment method.
-  - Online payment options: **Cash, Stripe, or Razorpay**.
-  - **Related doctors** section at the bottom.
-- Users need to **create an account or log in** before booking an appointment.
-
-## 👤 User Profile
-
-- Accessible after login.
-- Users can view and edit their profile:
-  - **Upload profile picture**.
-  - Update **name, email, address, gender, and birthday**.
-- View list of upcoming and past appointments.
-- **Logout** option available.
-
-## 🗄️ Admin Panel
-
-- **Dashboard**:
-  - Displays statistics: **Number of doctors**, **appointments**, **patients**, and **latest bookings**.
-  - Option to **cancel bookings** if needed.
-- **Add Doctor**:
-  - Form to add a new doctor profile (image, specialty, email, password, degree, address, experience, fees, description).
-- **Doctor List**:
-  - View all registered doctors with options to edit or delete profiles.
-- **Appointments**:
-  - List of all appointments including patient name, age, date, time, doctor name, fees.
-  - Admin actions: **Cancel** or **Mark as Completed**.
-
-## 🩺 Doctor Dashboard
-
-- **Earnings Overview**:
-  - Total earnings from completed appointments.
-- **Appointments List**:
-  - View detailed list of patient appointments (name, age, date, time, payment mode, status).
-  - Actions: **Mark appointment as completed** or **Cancel appointment**.
-- **Profile Management**:
-  - Doctors can update their **profile information**, including description, fees, address, and availability status.
-
-## 💳 Payment Integration
-
-- Supports multiple payment methods:
-  - **Cash Payment**
-  - **Razorpay Integration**
-- Ensures a secure and smooth payment experience for users.
-
-## 🌐 Project Setup
-
-To set up and run this project locally:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/medislot.git
-   cd medislot
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   npm install
-   cd client
-   npm install
-   ```
-
-3. **Environment Variables**:
-   - Create a `.env` file in the root directory and add the following:
-     ```env
-     MONGODB_URI=your_mongodb_connection_string
-     JWT_SECRET=your_jwt_secret
-     STRIPE_API_KEY=your_stripe_api_key
-     RAZORPAY_API_KEY=your_razorpay_api_key
-     ```
-
-4. **Run the Application**:
-   ```bash
-   npm run dev
-   ```
-
-## 📦 Folder Structure
+## 📦 Project Structure
 
 ```plaintext
-medislot/
-├── client/          # Frontend (React.js)
-├── server/          # Backend (Node.js, Express.js)
-├── models/          # MongoDB Schemas
-├── controllers/     # API Controllers
-├── routes/          # API Routes
-├── middleware/      # Authentication and Error Handling
-├── config/          # Configuration Files
-├── utils/           # Utility Functions
-├── public/          # Static Files
-└── .env             # Environment Variables
+MediSlot/
+├── frontend/                 # Patient app (React + Vite)
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── main.jsx
+│   ├── vercel.json           # SPA rewrites
+│   └── .env.example
+│
+├── admin/                    # Admin + Doctor dashboard (React + Vite)
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── main.jsx
+│   ├── vercel.json           # SPA rewrites
+│   └── .env.example
+│
+└── backend/                  # REST API (Node + Express + MongoDB)
+    ├── config/               # DB + Cloudinary config
+    ├── controllers/
+    ├── middleware/           # Auth + error handling
+    ├── models/               # Mongoose schemas
+    ├── routes/
+    ├── server.js
+    └── .env.example
 ```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- A MongoDB database (local or MongoDB Atlas)
+- Cloudinary account (for image uploads)
+- Razorpay account (for payments)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/anumukul/MediSlot.git
+cd MediSlot
+```
+
+### 2. Configure environment variables
+
+Each app has its own env file. Copy the templates and fill in your values:
+
+```bash
+cp backend/.env.example  backend/.env
+cp frontend/.env.example frontend/.env
+cp admin/.env.example    admin/.env
+```
+
+**`backend/.env`**
+
+| Variable | Description |
+| --- | --- |
+| `MONGODB_URI` | MongoDB connection string |
+| `JWT_SECRET` | Secret used to sign JWTs |
+| `CLOUDINARY_NAME` | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_SECRET_KEY` | Cloudinary API secret |
+| `ADMIN_EMAIL` | Admin login email |
+| `ADMIN_PASSWORD` | Admin login password |
+| `RAZORPAY_KEY_ID` | Razorpay key id |
+| `RAZORPAY_KEY_SECRET` | Razorpay key secret |
+| `CURRENCY` | Display currency (e.g. `INR`) |
+| `PORT` | Local port (default `4000`) |
+
+**`frontend/.env`**
+
+| Variable | Description |
+| --- | --- |
+| `VITE_BACKEND_URL` | Backend API base URL (no trailing slash) |
+| `VITE_RAZORPAY_KEY_ID` | Razorpay public key id |
+| `VITE_ADMIN_URL` | URL of the admin panel |
+
+**`admin/.env`**
+
+| Variable | Description |
+| --- | --- |
+| `VITE_BACKEND_URL` | Backend API base URL (no trailing slash) |
+| `VITE_CURRENCY` | Display currency |
+| `VITE_USER_URL` | URL of the patient frontend |
+
+> All `VITE_*` values are baked in at build time, so update and redeploy after changing them.
+
+### 3. Install dependencies & run
+
+Run each app in its own terminal:
+
+```bash
+# Backend  -> http://localhost:4000
+cd backend
+npm install
+npm run server      # nodemon (dev) — use `npm start` for production
+
+# Frontend -> http://localhost:5173
+cd frontend
+npm install
+npm run dev
+
+# Admin    -> http://localhost:5174
+cd admin
+npm install
+npm run dev
+```
+
+## ☁️ Deployment
+
+The apps are deployed independently and wired together through environment variables.
+
+### Backend → Render (Web Service)
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
+- **Environment**: add every variable from `backend/.env` (do **not** set `PORT` — Render provides it).
+- Allow Render to reach MongoDB Atlas via **Network Access → `0.0.0.0/0`**.
+
+### Frontend & Admin → Vercel
+Create two Vercel projects from this repo:
+
+| Project | Root Directory | Environment Variables |
+| --- | --- | --- |
+| Frontend | `frontend` | `VITE_BACKEND_URL`, `VITE_RAZORPAY_KEY_ID`, `VITE_ADMIN_URL` |
+| Admin | `admin` | `VITE_BACKEND_URL`, `VITE_CURRENCY`, `VITE_USER_URL` |
+
+- Framework preset: **Vite** (build `npm run build`, output `dist`).
+- `vercel.json` already handles SPA routing.
+- After the first deploy, set `VITE_ADMIN_URL` (frontend) and `VITE_USER_URL` (admin) to the deployed panel URLs and **redeploy**, since Vite inlines env vars at build time.
+
+## 📝 Notes
+
+- Payments use **Razorpay**. Test keys (`rzp_test_*`) work end-to-end; live payments require a verified Razorpay account.
+- Backend CORS is currently open so any Vercel origin can call the API.
+- Render's free tier sleeps after inactivity, so the first request after idle may be slow.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please feel free to submit issues, fork the repository, and open pull requests.
-
+Contributions are welcome! Feel free to open issues, fork the repo, and submit pull requests.
 
 ## 🌟 Acknowledgements
 
-- Thanks to the developers and contributors of MongoDB, Express.js, React.js, Node.js, Stripe, and Razorpay for their fantastic tools and libraries.
-
----
+Thanks to the teams behind MongoDB, Express, React, Node.js, Vite, Tailwind CSS, Cloudinary, and Razorpay for their excellent tools and libraries.
