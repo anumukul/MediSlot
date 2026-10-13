@@ -17,12 +17,12 @@ const Navbar = () => {
 
   return (
     <div className='flex items-center justify-between text-sm pt-2 pb-0 border-b border-b-gray-400'>
-      <div className="w-28 h-28 overflow-hidden">
+      <div className="flex items-center">
         <img
           onClick={() => navigate('/')}
           src={assets.logo || '/fallback-logo.png'}
           alt="Logo"
-          className="w-full h-full object-cover object-center cursor-pointer"
+          className="h-14 sm:h-16 w-auto object-contain cursor-pointer"
         />
       </div>
 
@@ -79,7 +79,7 @@ const Navbar = () => {
         {/* ---- Mobile Menu ---- */}
         <div className={`md:hidden ${showMenu ? 'fixed w-full' : 'h-0 w-0'} right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
           <div className='flex items-center justify-between px-5 py-6'>
-            <img src={assets.logo} className='w-36' alt="" />
+            <img src={assets.logo} className='w-56 h-auto' alt="" />
             <img onClick={() => setShowMenu(false)} src={assets.cross_icon} className='w-7' alt="" />
           </div>
           <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>

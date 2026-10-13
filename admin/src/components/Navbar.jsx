@@ -34,7 +34,7 @@ const Navbar = () => {
         {/* Logo */}
         <img
           onClick={() => navigate('/')}
-          className='w-36 sm:w-40 cursor-pointer'
+          className='h-12 sm:h-14 w-auto object-contain cursor-pointer'
           src={assets.admin_logo}
           alt="Logo"
         />

@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="grid md:grid-cols-[3fr_1fr_1fr] gap-12 my-10 mt-24 text-sm items-start">
         {/* Left Section */}
         <div className="flex items-start gap-4">
-  <img className="w-28 mt-1" src={assets.logo} alt="MediSlot Logo" />
+  <img className="w-56 h-auto mt-1" src={assets.logo} alt="MediSlot Logo" />
   <p className="text-gray-600 leading-6 md:max-w-[75%]">
     <strong>MediSlot – Effortless Healthcare Scheduling
 
